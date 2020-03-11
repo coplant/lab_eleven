@@ -51,7 +51,11 @@ void MainWindow::on_pushButtonSave_clicked()
 {
     QString fileName = QFileDialog::getSaveFileName(0, "Сохранить", "/output.txt", "*.txt");
     QFile file(fileName);
-
+    if (!(file.exists()))
+    {
+        file.open(QIODevice::ReadWrite);
+        file.close();
+    }
     if ((file.size() != 0) && (file.exists()))
     {
         file.remove();
